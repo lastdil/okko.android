@@ -39,22 +39,11 @@ public class OkkoTest {
     @Test
     public void FirstScreen(){
         driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS);
-        WebElement e0 = driver.findElement(By.id("ru.more.play:id/next"));
-        e0.click();
-        WebElement el = driver.findElement(By.id("ru.more.play:id/next"));
-        el.click();
-        WebElement el2 = driver.findElement(By.id("ru.more.play:id/next"));
-        el2.click();
-        WebElement skip = driver.findElement(By.id("ru.more.play:id/skip"));
-        skip.click();
-
-
-        /*List<AndroidElement> textFieldsList = driver.findElementsByClassName("android.widget.EditText");
-        textFieldsList.get(0).sendKeys("Some Name");
-        textFieldsList.get(2).sendKeys("Some@example.com");
-        driver.swipe(100, 500, 100, 100, 2);
-        driver.findElementByXPath(".//*[@text='Save']").click();
-        */
+        FirstScreen page = new FirstScreen(driver);
+        page.Next();
+        page.Next();
+        page.Next();
+        page.Skip();
     }
 
 }
