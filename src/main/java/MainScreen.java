@@ -28,18 +28,19 @@ public class MainScreen extends BasePage{
 
 
 
-        public void SwithToPreProd(){
+        public void SwitchToPreProd(){
             TouchAction longPress = new TouchAction(driver);
 
             longPress.longPress(
                    driver.findElementById("ru.more.play:id/toolbar_actionbar")).perform();
             PreProd.click();
         }
-        public void SearchClick(){
-            Search.click();
+        //public void SearchClick(){
+            //Search.click();
 
-        }
-        public void SearchEdit(String search){
+        //}
+        public void SearchField(String search){
+            Search.click();
             SearchEdit.sendKeys(search);
             SearchEdit.submit();
         }

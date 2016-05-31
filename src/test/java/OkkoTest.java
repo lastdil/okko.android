@@ -47,15 +47,15 @@ public class OkkoTest {
     @Test (priority = 2)
     public void SwitchToPreProd() throws Exception{
         MainScreen page = new MainScreen(driver);
-        page.SwithToPreProd();
+        page.SwitchToPreProd();
     }
     @Test (priority = 3)
         public void Search() throws Exception {
-        MainScreen page = new MainScreen(driver);
+        MainScreen page1 = new MainScreen(driver);
         driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-        page.SearchClick();
+       // page.SearchClick();
        // driver.findElement(By.id("ru.more.play:id/search_edit")).sendKeys("bla-bla");
-        page.SearchEdit("Марсианин");
+        page1.SearchField("sdfsdfdf");
       //  driver.findElement(By.id("ru.more.play:id/search_edit")).submit();
         //page.SearchEdit();
     }
