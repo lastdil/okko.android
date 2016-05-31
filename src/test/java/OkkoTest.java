@@ -15,12 +15,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class OkkoTest {
-    private AppiumDriver<AndroidElement> driver;
+    AppiumDriver<WebElement> driver;
 
     @BeforeTest
     public  void setUp() throws Exception {
         // set up appium
-
         File appDir = new File("C:\\Users\\idrygin\\IdeaProjects\\okko.android\\apps");
         File app = new File(appDir, "mobile-googlePlayWidevineAppDrm-debug.apk");
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -29,30 +28,35 @@ public class OkkoTest {
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("appPackage", "ru.more.play");
         capabilities.setCapability("appActivity", "ru.more.play.ui.StartupActivity");
-        driver = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = new AndroidDriver<WebElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
     }
-
     @AfterTest
     public void tearDown() throws Exception {
         driver.quit();
     }
 
     @Test
-    public void FirstScreen(){
+    public void FirstScreen () throws Exception {
         driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS);
         FirstScreen page = new FirstScreen(driver);
         page.Next();
         page.Next();
         page.Next();
         page.Skip();
-
-
     }
-    @Test
-    public void SwitchToPreProd(){
-        MainScreen page1 = new MainScreen(driver);
-        page1.ActionBarLongPress();
-        page1.SwithToPreProd();
+    @Test (priority = 2)
+    public void SwitchToPreProd() throws Exception{
+        MainScreen page = new MainScreen(driver);
+        page.SwithToPreProd();
     }
-
+    @Test (priority = 3)
+        public void Search() throws Exception {
+        MainScreen page = new MainScreen(driver);
+        driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
+        page.SearchClick();
+       // driver.findElement(By.id("ru.more.play:id/search_edit")).sendKeys("bla-bla");
+        page.SearchEdit("Марсианин");
+      //  driver.findElement(By.id("ru.more.play:id/search_edit")).submit();
+        //page.SearchEdit();
+    }
 }
