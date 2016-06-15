@@ -1,6 +1,7 @@
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.android.AndroidKeyCode;
 import org.testng.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -12,31 +13,37 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class OkkoTest {
     AppiumDriver<WebElement> driver;
 
     @BeforeTest
-    public  void setUp() throws Exception {
+    public void setUp() throws Exception {
         // set up appium
         File appDir = new File("C:\\Users\\idrygin\\IdeaProjects\\okko.android\\apps");
         File app = new File(appDir, "mobile-googlePlayWidevineAppDrm-debug.apk");
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName","Android Emulator");
+        capabilities.setCapability("deviceName", "Android Emulator");
         capabilities.setCapability("platformVersion", "6");
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("appPackage", "ru.more.play");
         capabilities.setCapability("appActivity", "ru.more.play.ui.StartupActivity");
+        //capabilities.setCapability("unicodeKeyboard", "True");
+        //capabilities.setCapability("resetKeyboard", "True");
         driver = new AndroidDriver<WebElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+
+
     }
+
     @AfterTest
     public void tearDown() throws Exception {
         driver.quit();
     }
 
     @Test
-    public void FirstScreen () throws Exception {
+    public void FirstScreen() throws Exception {
         driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS);
         FirstScreen page = new FirstScreen(driver);
         page.Next();
@@ -44,19 +51,66 @@ public class OkkoTest {
         page.Next();
         page.Skip();
     }
-    @Test (priority = 2)
-    public void SwitchToPreProd() throws Exception{
+
+
+    /*@Test(priority = 2)
+    public void SwitchToPreProd() throws Exception {
         MainScreen page = new MainScreen(driver);
         page.SwitchToPreProd();
-    }
-    @Test (priority = 3)
-        public void Search() throws Exception {
+    }*/
+
+    @Test(priority = 3)
+    public void OpenSettings() throws Exception {
         MainScreen page1 = new MainScreen(driver);
         driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
-       // page.SearchClick();
-       // driver.findElement(By.id("ru.more.play:id/search_edit")).sendKeys("bla-bla");
-        page1.SearchField("sdfsdfdf");
-      //  driver.findElement(By.id("ru.more.play:id/search_edit")).submit();
-        //page.SearchEdit();
+        //page1.OpenSetting();
+        page1.OpenBag();
+        /*
+        driver.findElement(By.id("ru.more.play:id/search_edit")).sendKeys("bla-bla");
+        page1.SearchClick();
+        page1.SearchField("sdfsdf"  );
+        driver.getKeyboard();
+        ((AndroidDriver)driver).pressKeyCode(AndroidKeyCode.KEYCODE_SEARCH);
+          driver.findElement(By.id("ru.more.play:id/search_edit")).submit();
+        page.SearchEdit();
+        } */
+
+
+    }
+
+    @Test(priority = 4)
+    public void BagPage() throws Exception {
+        BagPage page2 = new BagPage(driver);
+        page2.OpenDownloads();
+        page2.OpenHistory();
+        page2.OpenPurchased();
+        page2.OpenSaved();
+        page2.OpenDownloads();
+        page2.ClickBack();
+    }
+
+    @Test(priority = 5)
+    public void OpenSettings1() throws Exception {
+        MainScreen page1 = new MainScreen(driver);
+        page1.OpenSetting();
+    }
+
+    @Test(priority = 6)
+    public void Settings() throws Exception {
+        SettingsPage page1 = new SettingsPage(driver);
+        page1.ClickBack();
+    }
+
+    @Test(priority = 7)
+    public void OpenCatalog() throws Exception {
+        MainScreen page0 = new MainScreen(driver);
+        CatalogPage page1 = new CatalogPage(driver);
+        page0.OpenCatalog();
+        page1.OpenNew();
+        page1.OpenBest();
+        page1.OpenRecentlyAdded();
+        page1.OpenBlokbacters();
+        page1.OpenBestForChildrens();
+        
     }
 }
