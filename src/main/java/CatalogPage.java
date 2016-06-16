@@ -21,6 +21,11 @@ public class CatalogPage extends BasePage {
     private WebElement BestForChildren;
     @AndroidFindBy (xpath =("//android.widget.TextView[@text='Брутальное кино']"))
     private WebElement BrutalFilms;
+    @AndroidFindBy(className = "android.widget.ImageButton")
+    private WebElement Back;
+
+    @AndroidFindBy (xpath =("//android.widget.TextView[@text='Начало']"))
+    private WebElement Film;
 
 
 
@@ -47,5 +52,11 @@ public class CatalogPage extends BasePage {
     }
     public void OpenBrutalFilms(){
         BrutalFilms.click();
+    }
+    public void Back(){
+        Back.click();
+    }
+    public void OpenFilm(){
+        Film.click();
     }
 }

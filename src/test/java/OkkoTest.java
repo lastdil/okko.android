@@ -45,11 +45,11 @@ public class OkkoTest {
     @Test
     public void FirstScreen() throws Exception {
         driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS);
-        FirstScreen page = new FirstScreen(driver);
-        page.Next();
-        page.Next();
-        page.Next();
-        page.Skip();
+        FirstScreen firstScreen = new FirstScreen(driver);
+        firstScreen.Next();
+        firstScreen.Next();
+        firstScreen.Next();
+        firstScreen.Skip();
     }
 
 
@@ -61,10 +61,10 @@ public class OkkoTest {
 
     @Test(priority = 3)
     public void OpenSettings() throws Exception {
-        MainScreen page1 = new MainScreen(driver);
+        MainScreen mainScreen = new MainScreen(driver);
         driver.manage().timeouts().implicitlyWait(18, TimeUnit.SECONDS);
         //page1.OpenSetting();
-        page1.OpenBag();
+        mainScreen.OpenBag();
         /*
         driver.findElement(By.id("ru.more.play:id/search_edit")).sendKeys("bla-bla");
         page1.SearchClick();
@@ -80,13 +80,13 @@ public class OkkoTest {
 
     @Test(priority = 4)
     public void BagPage() throws Exception {
-        BagPage page2 = new BagPage(driver);
-        page2.OpenDownloads();
-        page2.OpenHistory();
-        page2.OpenPurchased();
-        page2.OpenSaved();
-        page2.OpenDownloads();
-        page2.ClickBack();
+        BagPage bagPage = new BagPage(driver);
+        bagPage.OpenDownloads();
+        bagPage.OpenHistory();
+        bagPage.OpenPurchased();
+        bagPage.OpenSaved();
+        bagPage.OpenDownloads();
+        bagPage.ClickBack();
     }
 
     @Test(priority = 5)
@@ -103,14 +103,33 @@ public class OkkoTest {
 
     @Test(priority = 7)
     public void OpenCatalog() throws Exception {
-        MainScreen page0 = new MainScreen(driver);
-        CatalogPage page1 = new CatalogPage(driver);
-        page0.OpenCatalog();
-        page1.OpenNew();
-        page1.OpenBest();
-        page1.OpenRecentlyAdded();
-        page1.OpenBlokbacters();
-        page1.OpenBestForChildrens();
-        
+        MainScreen mainScreen = new MainScreen(driver);
+        CatalogPage catalogPage = new CatalogPage(driver);
+        mainScreen.OpenCatalog();
+        catalogPage.OpenNew();
+        catalogPage.OpenBest();
+        catalogPage.OpenRecentlyAdded();
+        catalogPage.OpenBlokbacters();
+        catalogPage.OpenBestForChildrens();
+        catalogPage.Back();
+
+    }
+    @Test(priority = 8)
+    public void SaveFilmToBagAndRemove(){
+        MainScreen mainScreen = new MainScreen(driver);
+        CatalogPage catalogPage = new CatalogPage(driver);
+        MovieCard movieCard = new MovieCard(driver);
+        BagPage bagPage = new BagPage(driver);
+        mainScreen.OpenCatalog();
+        catalogPage.OpenFilm();
+        movieCard.BagButtonClick();
+        movieCard.Back();
+        catalogPage.Back();
+        mainScreen.OpenBag();
+        bagPage.OpenSaved();
+        bagPage.OpenFilm();
+        movieCard.BagButtonClick();
+        bagPage.ClickBack();
+        bagPage.ClickBack();
     }
 }

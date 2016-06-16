@@ -17,6 +17,8 @@ public class BagPage extends BasePage {
     private WebElement History;
     @AndroidFindBy(className = "android.widget.ImageButton")
     private WebElement Back;
+    @AndroidFindBy (xpath =("//android.widget.TextView[@text='Начало']"))
+    private WebElement Film;
 
 
     public BagPage (AppiumDriver driver){
@@ -36,5 +38,8 @@ public class BagPage extends BasePage {
     }
     public void ClickBack(){
         Back.click();
+    }
+    public void OpenFilm(){
+        Film.click();
     }
 }
