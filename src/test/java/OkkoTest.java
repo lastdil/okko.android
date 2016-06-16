@@ -111,7 +111,25 @@ public class OkkoTest {
         catalogPage.OpenRecentlyAdded();
         catalogPage.OpenBlokbacters();
         catalogPage.OpenBestForChildrens();
+        catalogPage.OpenBrutalFilms();
+        catalogPage.OpenSoon();
+        catalogPage.OpenRussian();
+        catalogPage.OpenSerials();
+        catalogPage.OpenSale();
+        catalogPage.OpenTop250();
+        catalogPage.OpenOskar();
+        catalogPage.OpenRoad();
         catalogPage.Back();
+        mainScreen.OpenCatalog();
+        catalogPage.OpenGenres();
+        catalogPage.OpenCartoons();
+        catalogPage.Back();
+        catalogPage.OpenFantasy();
+        catalogPage.Back();
+        catalogPage.OpenComedy();
+        catalogPage.Back();
+        catalogPage.Back();
+
 
     }
     @Test(priority = 8)
